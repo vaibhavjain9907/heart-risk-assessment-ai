@@ -8,7 +8,7 @@ from datetime import datetime
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Heart Risk Assessment",
-    page_icon="❤️",
+    page_icon="",
     layout="wide",
 )
 
@@ -32,7 +32,7 @@ from utils import compute_risk, sub_scores
 # ── Header ────────────────────────────────────────────────────────────────────
 hcol1, hcol2 = st.columns([3, 1])
 with hcol1:
-    st.markdown('<div class="page-title">❤️ Heart Risk Assessment</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-title"> Heart Risk Assessment</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-sub">Clinical risk stratification · blended AI + medical scoring</div>', unsafe_allow_html=True)
 with hcol2:
     st.markdown('<br>', unsafe_allow_html=True)
@@ -62,7 +62,7 @@ with left:
         with c7: exercise = st.toggle("Active Exercise Habits", value=False)
         with c8: smoking  = st.toggle("Smoker", value=False)
 
-    with st.expander("🩺  Vitals & Lab Values", expanded=True):
+    with st.expander("  Vitals & Lab Values", expanded=True):
         c1, c2 = st.columns(2)
         with c1:
             bp           = st.number_input("Blood Pressure (mmHg)", 50, 300, 120)
@@ -79,13 +79,13 @@ with left:
         with c2: low_hdl  = st.toggle("Low HDL Cholesterol", value=False)
         with c3: high_ldl = st.toggle("High LDL Cholesterol", value=False)
 
-    with st.expander("📋  Medical History", expanded=True):
+    with st.expander("  Medical History", expanded=True):
         c1, c2 = st.columns(2)
         with c1: family   = st.toggle("Family History of Heart Disease", value=False)
         with c2: diabetes = st.toggle("Diabetes", value=False)
 
     patient_name = st.text_input("Patient Name / ID (for history)", placeholder="e.g. Patient 001")
-    run = st.button("⚡  Run Assessment", use_container_width=True, type="primary")
+    run = st.button("  Run Assessment", use_container_width=True, type="primary")
 
 # ── RIGHT: Results ────────────────────────────────────────────────────────────
 with right:
@@ -130,7 +130,7 @@ with right:
         # ── Result card + animated heart ─────────────────────────────────────
         st.markdown(f"""
         <div class="result-card {rcss}">
-          <span class="heart-icon {hcls}">❤️</span>
+          <span class="heart-icon {hcls}"></span>
           <div>
             <div class="result-pct {txt_cls}">{probability:.1f}%</div>
             <div class="result-label {txt_cls}">{label}</div>
@@ -218,19 +218,19 @@ with right:
 
         # ── Factor pills ──────────────────────────────────────────────────────
         pills = []
-        if smoking:         pills.append(("🚬 Smoking",       "bad"))
-        if family:          pills.append(("🧬 Family Hx",     "bad"))
-        if diabetes:        pills.append(("🩸 Diabetes",      "bad"))
-        if bp > 140:        pills.append(("📈 High BP",       "bad"))
-        if chol > 240:      pills.append(("🧪 High Chol",    "bad"))
-        if bmi > 30:        pills.append(("⚖️ High BMI",     "bad"))
-        if high_bp:         pills.append(("💢 Hypertension", "bad"))
-        if low_hdl:         pills.append(("↓ HDL",           "bad"))
-        if high_ldl:        pills.append(("↑ LDL",           "bad"))
-        if crp > 3:         pills.append(("🔴 High CRP",     "bad"))
-        if fasting > 126:   pills.append(("🍬 High FBS",     "bad"))
-        if exercise:        pills.append(("🏃 Active",        "good"))
-        if 7 <= sleep <= 8: pills.append(("😴 Good Sleep",   "good"))
+        if smoking:         pills.append((" Smoking",       "bad"))
+        if family:          pills.append((" Family Hx",     "bad"))
+        if diabetes:        pills.append((" Diabetes",      "bad"))
+        if bp > 140:        pills.append((" High BP",       "bad"))
+        if chol > 240:      pills.append((" High Chol",    "bad"))
+        if bmi > 30:        pills.append((" High BMI",     "bad"))
+        if high_bp:         pills.append((" Hypertension", "bad"))
+        if low_hdl:         pills.append((" HDL",           "bad"))
+        if high_ldl:        pills.append((" LDL",           "bad"))
+        if crp > 3:         pills.append((" High CRP",     "bad"))
+        if fasting > 126:   pills.append((" High FBS",     "bad"))
+        if exercise:        pills.append((" Active",        "good"))
+        if 7 <= sleep <= 8: pills.append((" Good Sleep",   "good"))
 
         if pills:
             ph = "".join(f'<span class="pill pill-{k}">{l}</span>' for l, k in pills)
@@ -252,7 +252,7 @@ with right:
     else:
         st.markdown("""
         <div style="text-align:center;padding:4rem 1rem;color:#bbb">
-          <div style="font-size:3.5rem;margin-bottom:1rem">🫀</div>
+          <div style="font-size:3.5rem;margin-bottom:1rem"></div>
           <div style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase">
             Fill in patient details and run assessment
           </div>
@@ -264,9 +264,9 @@ if st.session_state.history:
     st.divider()
     hd1, hd2 = st.columns([2, 1])
     with hd1:
-        st.markdown("### 💾 Prediction History")
+        st.markdown("### Prediction History")
     with hd2:
-        if st.button("🗑️ Clear History", use_container_width=True):
+        if st.button(" Clear History", use_container_width=True):
             st.session_state.history = []
             st.rerun()
 
